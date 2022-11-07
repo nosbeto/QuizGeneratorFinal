@@ -107,6 +107,8 @@ let secondsLeft = 31
 let gameElement = document.querySelector('#game')
 timerEl = document.getElementById('timer');
 
+
+
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function () {
