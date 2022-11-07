@@ -103,7 +103,7 @@ incrementScore = (num) => {
     scoreText.innerText = score;
 };
 
-let secondsLeft = 2
+let secondsLeft = 31
 let gameElement = document.querySelector('#game')
 timerEl = document.getElementById('timer');
 
