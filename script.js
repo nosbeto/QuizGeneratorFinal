@@ -116,7 +116,7 @@ function setTime() {
     //   Create a variable to select the parent where I want to put append the child
       gameElement.appendChild(timerEl);
       gameElement.classList.replace('hidden','visible');
-      if (secondsLeft === 0 || questionCounter >= MAX_QUESTIONS) {
+      if (secondsLeft === 0) {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append image
