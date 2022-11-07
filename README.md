@@ -1,5 +1,6 @@
 # QuizGeneratorFinal
 Quiz Generator
+![Screenshot 2022-11-07 at 12 32 48 AM](https://user-images.githubusercontent.com/114036566/200233548-3829caa1-eb9e-416f-acc7-8cb6435c8324.png)
 
 ## Description
 
@@ -12,7 +13,7 @@ This app is a timed coding quiz with multiple-choice questions. This app runs in
 - [Support](#support)
 - [Contributing](#contributing)
 
-![Screenshot 2022-11-07 at 12 26 30 AM](https://user-images.githubusercontent.com/114036566/200233367-de95cbc9-6909-444d-b527-df124adcf9ea.png)
+
 
 ## Guide
 
