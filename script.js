@@ -4,10 +4,14 @@ const progressText = document.getElementById('progressText');
 const scoreText = document.getElementById('score');
 const game = document.getElementById('game');
 const hudEl =document.getElementById('hud')
+const endEl = document.querySelector('#end')
 btnStartElList = document.querySelector('#btn-start').addEventListener('click',startOnClick)
 btnNextElList = document.querySelector('#btn-high-score').addEventListener('click',startHighScore)
 btnGoBackElList = document.querySelector('#btn-go-back').addEventListener('click',goBackHome)
 containerEl = document.querySelector('.container')
+scoreEl = document.querySelector('#score')
+btnPlayAgainEl = document.querySelector('#btn-play-again').addEventListener('click',startOnClick2)
+
 
 let currentQuestion = {};
 let acceptingAnswers = false;
@@ -18,29 +22,37 @@ let availableQuesions = [];
 
 let questions = [
     {
-        question: 'Where did I go to school?',
-        choice1: 'UNC',
-        choice2: 'NC State',
-        choice3: 'UNCC',
-        choice4: 'Clemson',
-        answer: 3,
+        question: 'JavaScript is a ___ -side programming language.',
+        choice1: 'Client',
+        choice2: 'Server',
+        choice3: 'Both',
+        choice4: 'None',
+        answer: 2,
     },
     {
-        question: "Where am I from?",
-        choice1: "Brasil",
-        choice2: "Portugal",
-        choice3: "Spain",
-        choice4: "Venezuela",
+        question: "Which of the following will write the message “Hello DataFlair!” in an alert box?",
+        choice1: "alertBox(“Hello DataFlair!”);",
+        choice2: "alert(Hello DataFlair!);",
+        choice3: "msgAlert(“Hello DataFlair!”);",
+        choice4: "alert(“Hello DataFlair!”);",
         answer: 4,
     },
     {
-        question: "What is my Full Name?",
-        choice1: "Alberto Jose De Armas",
-        choice2: "Alberto Jonathan De Sousa",
-        choice3: "Pedro Alberto De Armas",
-        choice4: "Alberto Jesus De Armas",
-        answer: 1,
+        question: "How do you find the minimum of x and y using JavaScript?",
+        choice1: "min(x,y);",
+        choice2: "Math.min(x,y)",
+        choice3: "Math.min(xy)",
+        choice4: "min(xy);",
+        answer: 2,
     },
+    {
+        question: "If the value of x is 40, then what is the output of the following program? (x % 10 == 0)? console.log(“Divisible by 10”) : console.log(“Not divisible by 10”);",
+        choice1: "ReferenceError",
+        choice2: "Divisible by 10",
+        choice3: "Not divisible by 10",
+        choice4: "None of the above",
+        answer: 2,
+    }
 ];
 
 //CONSTANTS
@@ -55,10 +67,10 @@ startGame = () => {
 };
 
 getNewQuestion = () => {
-    if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+    if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS || secondsLeft === 0) {
         localStorage.setItem('mostRecentScore', score);
         //go to the end page
-        return
+        return test()
     }
     questionCounter++;
     const questionIndex = Math.floor(Math.random() * availableQuesions.length);
@@ -129,6 +141,15 @@ function setTime() {
     }, 1000);
 }
 
+function test () {
+    sendMessage();
+    clearPage ();
+    secondsLeft = 30;
+    timerEl.classList.replace('visible','hidden');
+    clearPage ()
+    timeIsOver ()
+}
+
 function sendMessage() {
     // timeEl.textContent = " ";
     var messageElement = document.createElement('h2')
@@ -159,6 +180,20 @@ function startOnClick () {
     showQuestions()
     document.querySelector('#btn-start').classList.add("hidden")
     document.querySelector('#btn-high-score').classList.add("hidden")
+}
+
+function removeMessage () {
+    messageEl = document.querySelector('.message')
+    if (typeof(messageEl) === 'object') {
+        messageEl = document.querySelector('.message')
+        messageEl.remove()
+    }
+}
+
+function startOnClick2 () {
+    startOnClick()
+    removeMessage()
+    endEl.classList.add('hidden')
 }
 
 function startHighScore (){
@@ -200,6 +235,7 @@ username.addEventListener('keyup', () => {
 });
 
 
+
 saveHighScore = (e) => {
     e.preventDefault();
 
@@ -214,6 +250,8 @@ saveHighScore = (e) => {
     localStorage.setItem('highScores', JSON.stringify(highScores));
 };
 
+let savebtnEl = document.querySelector('#saveScoreBtn').addEventListener('click',saveHighScore)
+
 // MORE
 const highScoresList = document.getElementById("highScoresList");
 
@@ -222,3 +260,5 @@ highScoresList.innerHTML = highScores
     return `<li class="high-score">${score.name} - ${score.score}</li>`;
   })
   .join("");
+
+
